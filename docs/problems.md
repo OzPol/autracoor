@@ -5,9 +5,14 @@ This investigation analyzes the conditions for collision between two autonomous 
 **System Definition:**
 * A 2D Cartesian coordinate system is established with a common intersection point, A, at the origin $(0, 0)$.
 * Train 1 travels along the negative x-axis towards the origin. Its initial position is $P_1(0) = (-a, 0)$, where $a > 0$. Its velocity is constant at $\vec{V_1} = (V_1, 0)$, where $V_1 > 0$.
-* Train 2 travels along the negative y-axis towards the origin. Its initial position is $P_2(0) = (0, -b)$, where $b > 0$. Its velocity is constant at $\vec{V_2} = (0, V_2)$, where $V_2 > 0$.
-* The initial distance between the trains is $d = \sqrt{a^2 + b^2}$.
-* The angle $\alpha$ between the vector from Train 1 to the origin and the vector connecting the two trains is given, satisfying $\cos(\alpha) = a/d$.
+* Train 2 travels along the negative y-axis towards the origin. Its initial position is  
+$\qquad P_2(0) = (0, -b)$,
+where $b > 0$. Its velocity is constant at  
+$\qquad \vec{V_2} = (0, V_2)$, where $V_2 > 0$  
+* The initial distance between the trains is  
+$\qquad d = \sqrt{a^2 + b^2}$  
+* The angle $\alpha$ between the vector from Train 1 to the origin and the vector connecting the two trains is given, satisfying
+$\qquad \cos(\alpha) = a/d$
 
 
 ---
@@ -65,7 +70,7 @@ $$|t_1 - t_2| \le t_p$$
 Substituting the expressions for 
 $\qquad t_1$ and $t_2$: 
 
-$$\left| \frac{a}{V_1} - \frac{b}{V_2} \right| \le t_p$$
+$$\left| \frac{a}{V_1} - \frac{b}{V_2} \right| \le t_p$$ 
 
 **Pseudocode for Interval Collision Check:**
 
@@ -93,9 +98,10 @@ This problem transitions from detection to active avoidance, introducing an opti
 
 **Problem Formulation:** Assuming a collision is predicted, determine the new speed for Train 1, $V_1'$, that prevents the collision while minimizing the change in speed, 
 
-$\qquad |\Delta V_1| = |V_1' - V_1|$
+$\qquad |\Delta V_1| = |V_1' - V_1|$ 
 
 **Mathematical Analysis:** To avoid collision, we seek the smallest adjustment, which places the system at the boundary of the safe region:  
+
 $\qquad |a/V_1' - b/V_2| = t_p$  
 
 This yields two potential solutions: 
@@ -105,7 +111,7 @@ This yields two potential solutions:
 
 The optimal speed $V_1'$ is the valid candidate that minimizes 
 
-$\qquad |V_1' - V_1|$
+$\qquad |V_1' - V_1|$ 
 
 **Pseudocode for Speed Adjustment:**
 
@@ -138,13 +144,14 @@ This problem incorporates the physical limitations of the train's propulsion and
 **Problem Formulation:** Given an imminent collision and a desired safe arrival time 
 
 $\qquad t_{1, \text{safe}}'$ 
+
 determine a feasible constant acceleration $A$ that allows the train to travel the distance $a$ in the required time, subject to the constraint  
 
 $\qquad |A| \le A_{\max}$
 
 **Mathematical Analysis:** Using the kinematic equation 
 
-$\qqud d = v_0 t + \frac{1}{2} A t^2$  
+$\qquad d = v_0 t + \frac{1}{2} A t^2$  
 we solve for the required constant acceleration $A$ for a given target time $t$: 
 
 $$A = \frac{2(a - V_1 t)}{t^2}$$
@@ -193,15 +200,21 @@ This problem evolves the scenario to a cooperative solution where both agents pa
 
 **Problem Formulation:** Determine the new pair of speeds  
 
-$\qquad (V_1', V_2')$ that resolves the conflict while minimizing a joint cost function, such as the sum of squared velocity changes:  
+$\qquad (V_1', V_2')$
 
-$\qquad J = (V_1' - V_1)^2 + (V_2' - V_2)^2$.
+that resolves the conflict while minimizing a joint cost function, such as the sum of squared velocity changes:  
+
+$\qquad J = (V_1' - V_1)^2 + (V_2' - V_2)^2$  
 
 **Mathematical Analysis:** This is a constrained optimization problem solved using Lagrange Multipliers. We minimize $J(V_1', V_2')$ subject to the safety constraint  
 
-$\wquad |a/V_1' - b/V_2'| = t_p$  
+$\qquad |a/V_1' - b/V_2'| = t_p$  
 
-This leads to a system of nonlinear equations that can be solved numerically to find the optimal pair $(V_1', V_2')$ that satisfies one of the two boundary conditions while minimizing the cost $J$.
+This leads to a system of nonlinear equations that can be solved numerically to find the optimal pair  
+
+$\qquad (V_1', V_2')$ 
+
+that satisfies one of the two boundary conditions while minimizing the cost $J$.
 
 **Pseudocode for Coordinated Avoidance:**
 
@@ -234,11 +247,12 @@ This problem introduces the real-world element of uncertainty, shifting from a d
 
 **Problem Formulation:** The initial state variables 
 
-$\qquad (a, b, V_1, V_2)$ 
+$\qquad (a, b, V_1, V_2)$  
 
 are modeled as independent normal (Gaussian) random variables with known means and variances. The task is to compute the probability of collision, 
 
 $\qquad P(\text{collision})$,  
+
 where collision is defined by 
 
 $\qquad |a/V_1 - b/V_2| \le t_p$  
