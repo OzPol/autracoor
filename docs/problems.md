@@ -27,8 +27,8 @@ $$\frac{a}{V_1} = \frac{b}{V_2}$$
 
 **Pseudocode for Collision Check:**
 
-'''json
-    function CheckPointCollision(a, b, V1, V2):
+
+>    function CheckPointCollision(a, b, V1, V2):
         // Inputs: a, b, V1, V2
         if V1 <= 0 or V2 <= 0:
             return ERROR "Speeds must be positive."
@@ -39,7 +39,6 @@ $$\frac{a}{V_1} = \frac{b}{V_2}$$
             return TRUE // Collision is imminent
         else:
             return FALSE // No collision
-'''
 
 
 ---
