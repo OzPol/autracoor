@@ -28,16 +28,19 @@ $$\frac{a}{V_1} = \frac{b}{V_2}$$
 **Pseudocode for Collision Check:**
 
 
->    function CheckPointCollision(a, b, V1, V2):
-        // Inputs: a, b, V1, V2
-        if V1 <= 0 or V2 <= 0:
-            return ERROR "Speeds must be positive."
-        t1_arrival = a / V1
-        t2_arrival = b / V2
-        // Use a small tolerance (epsilon) for float comparison in practice
+    function CheckPointCollision(a, b, V1, V2):  
+
+        // Inputs: a, b, V1, V2  
+        if V1 <= 0 or V2 <= 0:  
+            return ERROR "Speeds must be positive." 
+            
+        t1_arrival = a / V1  
+        t2_arrival = b / V2. 
+        
+        // Use a small tolerance (epsilon) for float comparison in practice        
         if t1_arrival == t2_arrival:
             return TRUE // Collision is imminent
-        else:
+        else:  
             return FALSE // No collision
 
 
